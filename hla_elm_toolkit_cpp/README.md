@@ -20,8 +20,9 @@ is not included, and why.
 Everything said in the Python package's README Section 1 applies here
 too: this is a **from-scratch reference reimplementation**, not the
 article's original, registry-scale codebase (now open-source at
-https://biomedntuagr.sharepoint.com/:f:/g/IgCgDy6zAJ8HTYmovHlYxrQXAeRFyCh7S8HutOUI6ddvDLg?e=0bO3bG,
-per the article's Data Availability Statement). The base ELM's input
+https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026,
+archived at Zenodo, DOI: 10.5281/zenodo.22061924, per the article's
+Data Availability Statement). The base ELM's input
 encoding and hidden layer are simplified relative to the article's
 domain-structured HL-1/HL-2/HL-3 topology (Section 2.4), in exactly the
 same way as the Python package. No real registry data is included; the
@@ -139,7 +140,12 @@ the canonical reference (see Section 1).
 
 ## 7. License
 
-Not yet assigned; treat as "all rights reserved, provided for internal
-review purposes" until the authors specify otherwise. The article's
-original implementation is a separate codebase with its own license;
-see https://biomedntuagr.sharepoint.com/:f:/g/IgCgDy6zAJ8HTYmovHlYxrQXAeRFyCh7S8HutOUI6ddvDLg?e=0bO3bG.
+Released under the MIT License (see the `LICENSE` file in this
+repository), alongside the Python package it is distributed with.
+Archived, together with the article's original registry-scale
+implementation, at:
+
+- GitHub: https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
+- Zenodo (versioned DOI): 10.5281/zenodo.22061924
+
+consistent with the Code Availability statement in the article.
