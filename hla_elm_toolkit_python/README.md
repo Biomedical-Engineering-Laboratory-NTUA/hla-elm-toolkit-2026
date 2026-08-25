@@ -37,10 +37,11 @@ accompany the article's revision process, not the article's original,
 registry-scale codebase. That original implementation has since been
 released as open-source at the repository of the NTUA Biomedical
 Engineering Laboratory:
-https://biomedntuagr.sharepoint.com/:f:/g/IgCgDy6zAJ8HTYmovHlYxrQXAeRFyCh7S8HutOUI6ddvDLg?e=0bO3bG
-(see the article's Data Availability Statement). If you need the exact
-original implementation for reproducibility review, use that repository
-rather than this package. Three things follow from the fact that this
+https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
+(archived at Zenodo, DOI: 10.5281/zenodo.22061924; see the article's
+Data Availability Statement). If you need the exact original
+implementation for reproducibility review, use that repository rather
+than this package. Three things follow from the fact that this
 remains a separate, simplified reimplementation:
 
 1. **No real registry data is included or reachable.** The HTO, ORAM,
@@ -255,9 +256,11 @@ critical gaps without requiring a full new experiment:
 ## 9. License
 
 This reference toolkit (a separate, simplified reimplementation; see
-Section 1) is not yet assigned a license; treat it as "all rights
-reserved, provided for internal review purposes" until the authors
-specify otherwise. The article's original, registry-scale implementation
-is a separate codebase, now released as open-source at
-https://biomedntuagr.sharepoint.com/:f:/g/IgCgDy6zAJ8HTYmovHlYxrQXAeRFyCh7S8HutOUI6ddvDLg?e=0bO3bG;
-consult that repository directly for its license terms.
+Section 1) is released under the MIT License (see the `LICENSE` file in
+this repository). It is archived, together with the article's original
+registry-scale implementation, at:
+
+- GitHub: https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
+- Zenodo (versioned DOI): 10.5281/zenodo.22061924
+
+consistent with the Code Availability statement in the article.
