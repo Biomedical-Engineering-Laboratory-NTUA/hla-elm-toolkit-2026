@@ -19,15 +19,15 @@
 hla_elm_toolkit.baselines.grimm_style
 ========================================
 
-GRIMM-style graph-based five-locus imputation, following Algorithm 3 of
+GRIMM-style graph-based five-locus imputation, following Algorithm S3 of
 the article ("GRIMM: graph-based five-locus imputation, simplified, based
-on the published method [10]", Section 2.7.1).
+on the published method [10]", Supplementary Section S2).
 
 The reference haplotype graph is represented here as edge weights between
 consecutive-locus allele pairs derived from a haplotype-frequency table
 (a simplification documented in the article: "these pseudocode summaries
 omit implementation-specific details ... such as GRIMM's exact graph
-construction and traversal optimizations", Section 2.7.1). Candidate
+construction and traversal optimizations", Supplementary Section S2). Candidate
 paths through the graph are scored as the product of edge weights, and
 the highest-likelihood path is returned as the top-1 call, or
 ``no_match_in_reference_panel`` if no path is consistent with the query
@@ -64,7 +64,7 @@ class GrimmStyleGraph:
         return graph
 
     def path_likelihood(self, hap: Haplotype) -> float:
-        """Product of edge weights along a haplotype's locus-to-locus path (Algorithm 3, line 6)."""
+        """Product of edge weights along a haplotype's locus-to-locus path (Algorithm S3, line 6)."""
         like = 1.0
         for i in range(len(hap) - 1):
             like *= self.edge_weight.get((i, hap[i], hap[i + 1]), 0.0)
@@ -94,7 +94,7 @@ class GrimmStyleImputer:
 
     def impute(self, genotype: Genotype) -> Tuple[str, Optional[Tuple[Haplotype, Haplotype]], Optional[float]]:
         """
-        Algorithm 3: traverse the reference graph restricted to alleles
+        Algorithm S3: traverse the reference graph restricted to alleles
         consistent with the query genotype at each typed locus, rank
         candidate diplotypes (pairs of compatible haplotype paths) by the
         product of their path likelihoods, and return the top-1 call with

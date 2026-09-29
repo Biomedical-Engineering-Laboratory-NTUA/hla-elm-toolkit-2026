@@ -5,44 +5,33 @@ Reference Python implementations of **every method compared** in:
 > Kepentzis, S.; Chatzistamatiou, T.; Digalakis, J.; Petropoulou, O.;
 > Matsopoulos, G.K.; Koutsouris, D. *Development of an Extreme Learning
 > Machine approach to upgrade low/mid to high resolution HLA data
-> improving the usability of donor data from registries.* Genes
-> (submitted).
+> improving the usability of donor data from registries.* Genes (MDPI),
+> manuscript ID genes-4557658, under review.
 
 This package implements the base Extreme Learning Machine (ELM) and its
 three extensions (KELM, WELM, Ensemble ELM), the three EM/Bayesian
 comparator baselines the article specifies in pseudocode (GRIMM-style,
-HaploStats-style, and Hapl-o-Mat-style; Section 2.7.1, Algorithms 3-5),
+HaploStats-style, and Hapl-o-Mat-style; Supplementary Section S2,
+Algorithms S3-S5),
 and the MLP / gradient-boosted-tree comparators used in the article's
-framework-level benchmarking (Section 2.7).
+framework-level benchmarking (Supplementary Section S3).
 
-**Note on the requested Python version.** The request that accompanied
-this package asked for "Python 3.2". Python 3.2 reached end-of-life in
-2016 and lacks language features (e.g. f-strings, `dataclasses`) that
-this codebase — and most modern scientific Python — relies on. The
-article itself states its own implementation ran on **Python 3.12**
-(Section 2.8, "Titanas" server specification), so this package targets
-**Python 3.9+** (developed and tested on 3.12) on the assumption that
-"3.2" was a typo. If Python 3.2 compatibility is genuinely required,
-please say so and the package can be restructured accordingly — it would
-require removing `dataclasses`, f-strings, and `pathlib`/typing-module
-usage throughout, and pinning much older `numpy`/`scikit-learn` releases
-(if any compatible wheel still exists for those library versions).
+**Python version.** This package targets **Python 3.9+** and is
+developed and tested on **Python 3.12**, the version used for the
+article's own implementation (Section 2.7, "Titanas" server
+specification).
 
 ---
 
 ## 1. Scope and honesty about limitations
 
-This is a **from-scratch reference reimplementation** written to
-accompany the article's revision process, not the article's original,
-registry-scale codebase. That original implementation has since been
-released as open-source at the repository of the NTUA Biomedical
-Engineering Laboratory:
-https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
-(archived at Zenodo, DOI: 10.5281/zenodo.22061924; see the article's
-Data Availability Statement). If you need the exact original
-implementation for reproducibility review, use that repository rather
-than this package. Three things follow from the fact that this
-remains a separate, simplified reimplementation:
+This is a **from-scratch reference implementation** of the published
+algorithms, written to accompany the article. It is **not** the
+registry-scale production code that produced the article's reported
+figures, and it is not expected to reproduce them. The production
+implementation is bound to the registry data environment and is not
+distributed here; requests relating to it should be addressed to the
+corresponding author. Three things follow:
 
 1. **No real registry data is included or reachable.** The HTO, ORAM,
    and GRPT donor registries used in the article are not distributable
@@ -50,7 +39,7 @@ remains a separate, simplified reimplementation:
    restrictions). `hla_elm_toolkit.data.make_synthetic_population()`
    generates a small synthetic reference population with a Zipf-like,
    rare-allele-dominated frequency spectrum (loosely mirroring the
-   pattern quantified in the article's Table 5) purely for
+   pattern quantified in the article's Tables 4 and 5) purely for
    demonstration and unit testing. **Do not** interpret any
    accuracy/call-rate number produced by this package's demo or tests as
    comparable to the article's reported figures.
@@ -77,7 +66,7 @@ remains a separate, simplified reimplementation:
 
 3. **GRIMM-, HaploStats-, and Hapl-o-Mat-style baselines are the
    article's own documented simplifications**, not the published tools.
-   The article is explicit about this (Section 2.7.1): "these pseudocode
+   The article is explicit about this (Section 2.6 and Supplementary Section S2): "these pseudocode
    summaries omit implementation-specific details (e.g., GRIMM's exact
    graph construction and traversal optimizations, HaploStats'
    race/ethnicity-specific reference tables, and Hapl-o-Mat's
@@ -89,11 +78,10 @@ remains a separate, simplified reimplementation:
    the real tools by the article's own account, and running the
    published Hapl-o-Mat tool or the NMDP HaploStats web service itself
    is explicitly listed as outstanding future work in the article
-   (Sections 3.10-3.11, 5).
+   (Supplementary Sections S4.3-S4.4 and main text Section 5).
 
-If you need the exact original implementation for reproducibility
-review, it is not available through this package; see the article's Data
-Availability Statement for the release plan.
+The exact production implementation is not available through this
+package; see the article's Data Availability Statement.
 
 ---
 
@@ -103,18 +91,18 @@ Availability Statement for the release plan.
 |---|---|
 | Section 2.2 (resolution levels, ambiguity, missing-locus handling) | `hla_elm_toolkit/data.py` |
 | Section 2.3 (accuracy, call rate, posterior probability, top-k) | `hla_elm_toolkit/metrics.py` |
-| Section 2.8 (95% CI via Wilson score, chosen over naive bootstrap) | `hla_elm_toolkit/metrics.py::wilson_score_interval` |
-| Section 2.4-2.5, Algorithm 1 (ELM training), Algorithm 2 (inference) | `hla_elm_toolkit/elm/base_elm.py` |
-| Section 2.6, Kernel ELM (KELM) | `hla_elm_toolkit/elm/kelm.py` |
-| Section 2.6, Weighted ELM (WELM) | `hla_elm_toolkit/elm/welm.py` |
-| Section 2.6, Ensemble ELM | `hla_elm_toolkit/elm/ensemble_elm.py` |
-| Section 2.7, MLP comparator (Table 7) | `hla_elm_toolkit/baselines/mlp_baseline.py` |
-| Section 2.7, gradient-boosted-tree comparator (Table 7) | `hla_elm_toolkit/baselines/gbt_baseline.py` |
-| Section 2.7.1, Algorithm 3 (GRIMM-style, graph-based) | `hla_elm_toolkit/baselines/grimm_style.py` |
-| Section 2.7.1, Algorithm 4 (HaploStats-style) | `hla_elm_toolkit/baselines/haplostats_style.py` |
-| Section 2.7.1, Algorithm 5 (Hapl-o-Mat-style EM) | `hla_elm_toolkit/baselines/haplo_em.py` |
-| Section 3.7 (two-locus in-registry EM baseline) | `HaploEM(loci=("A","B"))` — same class, different `loci` argument |
-| Section 3.11 (five-locus in-house EM baseline) | `HaploEM(loci=("A","B","C","DRB1","DQB1"))` — same class |
+| Section 2.7 (95% CI via Wilson score, chosen over naive bootstrap) | `hla_elm_toolkit/metrics.py::wilson_score_interval` |
+| Sections 2.4-2.5, Algorithm S1 (ELM training), Algorithm S2 (inference) | `hla_elm_toolkit/elm/base_elm.py` |
+| Section 2.6 and Supplementary Section S3.2, Kernel ELM (KELM) | `hla_elm_toolkit/elm/kelm.py` |
+| Section 2.6 and Supplementary Section S3.2, Weighted ELM (WELM) | `hla_elm_toolkit/elm/welm.py` |
+| Section 2.6 and Supplementary Section S3.2, Ensemble ELM | `hla_elm_toolkit/elm/ensemble_elm.py` |
+| Section 2.6, MLP comparator (Supplementary Table S2) | `hla_elm_toolkit/baselines/mlp_baseline.py` |
+| Section 2.6, gradient-boosted-tree comparator (Supplementary Table S2) | `hla_elm_toolkit/baselines/gbt_baseline.py` |
+| Supplementary Section S2, Algorithm S3 (GRIMM-style, graph-based) | `hla_elm_toolkit/baselines/grimm_style.py` |
+| Supplementary Section S2, Algorithm S4 (HaploStats-style) | `hla_elm_toolkit/baselines/haplostats_style.py` |
+| Supplementary Section S2, Algorithm S5 (Hapl-o-Mat-style EM) | `hla_elm_toolkit/baselines/haplo_em.py` |
+| Supplementary Section S4.1 (two-locus in-registry EM baseline) | `HaploEM(loci=("A","B"))` — same class, different `loci` argument |
+| Supplementary Section S4.4 (five-locus in-house EM baseline) | `HaploEM(loci=("A","B","C","DRB1","DQB1"))` — same class |
 
 ---
 
@@ -170,7 +158,7 @@ python examples/run_demo_comparison.py --n-donors 1500 --seed 0
 ```
 
 which prints a per-method summary table in the same
-`value [95% CI]` style used throughout the article's tables (e.g. Table 16).
+`value [95% CI]` style used throughout the article's tables (e.g. Table 10).
 
 ---
 
@@ -204,19 +192,19 @@ hla_elm_toolkit/
 │   ├── metrics.py                  accuracy, call rate, Wilson score 95% CI
 │   ├── elm/
 │   │   ├── __init__.py
-│   │   ├── base_elm.py             Algorithm 1 (training) + Algorithm 2 (inference)
+│   │   ├── base_elm.py             Algorithm S1 (training) + Algorithm S2 (inference)
 │   │   ├── kelm.py                 Kernel ELM (Section 2.6)
 │   │   ├── welm.py                 Weighted ELM (Section 2.6)
 │   │   └── ensemble_elm.py         Ensemble ELM (Section 2.6)
 │   └── baselines/
 │       ├── __init__.py
-│       ├── haplo_em.py             Algorithm 5 (Hapl-o-Mat-style EM; used for
-│       │                            both the Section 3.7 two-locus and
-│       │                            Section 3.11 five-locus baselines)
-│       ├── haplostats_style.py     Algorithm 4 (HaploStats-style)
-│       ├── grimm_style.py          Algorithm 3 (GRIMM-style, graph-based)
-│       ├── mlp_baseline.py         MLP comparator (Section 2.7; requires scikit-learn)
-│       └── gbt_baseline.py         Gradient-boosted-tree comparator (Section 2.7; requires scikit-learn)
+│       ├── haplo_em.py             Algorithm S5 (Hapl-o-Mat-style EM; used for
+│       │                            both the Supplementary Section S4.1 two-locus and
+│       │                            Supplementary Section S4.4 five-locus baselines)
+│       ├── haplostats_style.py     Algorithm S4 (HaploStats-style)
+│       ├── grimm_style.py          Algorithm S3 (GRIMM-style, graph-based)
+│       ├── mlp_baseline.py         MLP comparator (Section 2.6; requires scikit-learn)
+│       └── gbt_baseline.py         Gradient-boosted-tree comparator (Section 2.6; requires scikit-learn)
 ├── examples/
 │   └── run_demo_comparison.py      end-to-end demo running every method
 └── tests/
@@ -235,32 +223,26 @@ authors' environment); this package's `haplostats_style.py` and
 `haplo_em.py` are the article's own open, reproducible approximations of
 those tools' core algorithms, not the tools themselves.
 
-## 8. Article gap-closing script (Γ.1)
+## 8. First-field rescoring script
 
-One additional script, added after the article's supervisory review
-round, is provided to help close one of the manuscript's flagged
-critical gaps without requiring a full new experiment:
-
-* **`examples/recompute_first_field_accuracy.py`** (article gap **Γ.1**):
-  GRIMM, hlaR ImputeHaplo, and the in-house EM baseline (Sections
-  3.8-3.11) are scored at first-field resolution, while the ELM
-  framework's headline accuracy is reported at two-field resolution --
-  making Tables 16-19 not strictly like-for-like. This script takes the
-  ELM's *already-computed* two-field predictions (exported to a simple
-  CSV; see the script's docstring for the exact format) and truncates
-  both predictions and truth to first-field before rescoring, so the
-  same "value \[95% CI\]" figure can be added to the "ELM (reported,
-  overall)" row of each affected table. No new model training or
-  inference is required -- only re-scoring of existing predictions.
+* **`examples/recompute_first_field_accuracy.py`**: the comparators
+  (GRIMM, hlaR ImputeHaplo and the in-house EM baseline; main text
+  Sections 3.2-3.3 and Supplementary Sections S4.1-S4.4) are scored at
+  first-field resolution, while the ELM framework's headline accuracy is
+  reported at two-field resolution. This script takes already-computed
+  two-field ELM predictions (exported to a simple CSV; see the script's
+  docstring for the exact format), truncates both predictions and truth
+  to first-field, and rescores them, so that a like-for-like first-field
+  figure can be reported alongside the comparators (main text Table 10
+  and Table 11). No new model training or inference is required.
 
 ## 9. License
 
-This reference toolkit (a separate, simplified reimplementation; see
-Section 1) is released under the MIT License (see the `LICENSE` file in
-this repository). It is archived, together with the article's original
-registry-scale implementation, at:
+This reference toolkit (see Section 1 for its scope) is released under
+the MIT License (see the `LICENSE` file in this repository). It is
+archived at:
 
 - GitHub: https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
 - Zenodo (versioned DOI): 10.5281/zenodo.22061924
 
-consistent with the Code Availability statement in the article.
+consistent with the Data Availability Statement in the article.

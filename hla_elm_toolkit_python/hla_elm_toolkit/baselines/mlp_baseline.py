@@ -23,7 +23,7 @@ Multilayer perceptron (MLP) comparator, trained by back-propagation with
 early stopping, as described in article Section 2.7: "a multilayer
 perceptron (MLP) with one hidden layer of equivalent size trained by
 back-propagation with early stopping [32]". Used in the framework-level
-benchmarking of Sections 3.2-3.4 (Table 7).
+benchmarking of Supplementary Section S3 (Table S2).
 
 Requires scikit-learn (see requirements.txt / README).
 """
@@ -52,7 +52,7 @@ class MLPBaseline:
     """
     Per-locus MLP: for a single target locus, predicts the most likely
     high-resolution allele class from the multi-hot input encoding used
-    by the ELM family, allowing a like-for-like comparison (Table 7).
+    by the ELM family, allowing a like-for-like comparison (Supplementary Table S2).
     """
 
     hidden_size: int = 200

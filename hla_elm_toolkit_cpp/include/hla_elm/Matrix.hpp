@@ -125,7 +125,7 @@ public:
     // Solve A * X = B for X, where A (this matrix) is square, via
     // Gaussian elimination with partial pivoting. Used to solve the
     // closed-form ELM output-weight equation
-    // (H^T H + I/lambda) * beta = H^T T (Algorithm 1, line 18).
+    // beta = pinv(H) * T (Algorithm S1, line 16).
     Matrix solve(const Matrix& B) const {
         if (rows_ != cols_) throw std::invalid_argument("solve: matrix must be square");
         if (B.rows_ != rows_) throw std::invalid_argument("solve: rhs row mismatch");

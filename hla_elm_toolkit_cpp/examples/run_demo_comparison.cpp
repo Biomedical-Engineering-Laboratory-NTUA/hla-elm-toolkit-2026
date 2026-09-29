@@ -119,6 +119,6 @@ int main(int argc, char** argv) {
     std::cout << "\nNote: this demo uses a small synthetic reference population for\n"
                  "illustration only; absolute accuracy/call-rate figures are not\n"
                  "comparable to the article's real-registry results (Sections 3.5,\n"
-                 "3.7-3.11), which used the (non-distributable) HTO/ORAM/GRPT data.\n";
+                 "Supplementary Section S4), which used the (non-distributable) HTO/ORAM/GRPT data.\n";
     return 0;
 }

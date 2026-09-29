@@ -120,7 +120,7 @@ public:
     explicit BaseELM(std::size_t hidden_size, double reg_lambda = 1.0, std::uint64_t seed = 0)
         : hidden_size_(hidden_size), reg_lambda_(reg_lambda), seed_(seed) {}
 
-    // Train following Algorithm 1: for each training genotype, sample a
+    // Train following Algorithm S1: for each training genotype, sample a
     // target diplotype uniformly at random from the diplotypes
     // compatible with that (possibly ambiguous) genotype, accumulate
     // the hidden-layer output matrix H and one-hot target matrix, then
@@ -160,14 +160,18 @@ public:
         }
 
         Matrix H = hidden_activation(X);
+        // beta = pinv(H) * T (Algorithm S1, line 16). Solved here in normal-
+        // equations form, (H^T H) beta = H^T T, which coincides with the
+        // Moore-Penrose solution whenever H^T H is non-singular. No ridge term
+        // is applied: the article's implementation uses the unregularized
+        // pseudo-inverse.
         Matrix HtH = H.transpose() * H;
-        HtH.add_scaled_identity(1.0 / reg_lambda_);
         Matrix HtT = H.transpose() * T;
-        beta_ = HtH.solve(HtT);  // Algorithm 1, line 18
+        beta_ = HtH.solve(HtT);
     }
 
     // Rank candidate diplotypes by output score, restricted to those
-    // compatible with this genotype (Algorithm 2), with scores
+    // compatible with this genotype (Algorithm S2), with scores
     // converted to a softmax-normalized distribution over the
     // compatible subset for readability.
     std::vector<std::pair<Diplotype, double>> predict_ranked(
@@ -214,7 +218,7 @@ private:
     }
 
     std::size_t hidden_size_;
-    double reg_lambda_;
+    double reg_lambda_;  // retained for API compatibility; unused (see fit())
     std::uint64_t seed_;
 
     std::optional<InputEncoder> encoder_;

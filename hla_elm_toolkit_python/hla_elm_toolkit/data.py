@@ -72,7 +72,7 @@ class ReferencePopulation:
     """
     A reference haplotype-frequency table plus the donor records used to
     estimate it, following the offline/online split described for
-    HaploStats, GRIMM, and Hapl-o-Mat in Section 2.7.1 (Algorithms 3-5).
+    HaploStats, GRIMM, and Hapl-o-Mat in Supplementary Section S2 (Algorithms S3-S5).
     """
 
     loci: Tuple[str, ...]

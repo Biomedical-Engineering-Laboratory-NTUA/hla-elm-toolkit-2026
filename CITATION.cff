@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the article and the archived software."
+title: "hla-elm-toolkit-2026: reference implementation of an ELM framework for HLA resolution upgrading"
+abstract: >-
+  Reference implementation of the Extreme Learning Machine training and inference
+  algorithms, the KELM/WELM/Ensemble ELM extensions, and the comparator algorithms
+  described in Kepentzis et al. (Genes, MDPI, manuscript genes-4557658). Not the
+  registry-scale production code; see README.md for scope.
+type: software
+license: MIT
+version: "1.1.0"
+date-released: "2026-10-01"
+repository-code: "https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026"
+authors:
+  - family-names: Kepentzis
+    given-names: Stavros
+  - family-names: Chatzistamatiou
+    given-names: Theofanis
+  - family-names: Digalakis
+    given-names: Jason
+  - family-names: Petropoulou
+    given-names: Ourania
+  - family-names: Matsopoulos
+    given-names: George K.
+  - family-names: Koutsouris
+    given-names: Dimitrios

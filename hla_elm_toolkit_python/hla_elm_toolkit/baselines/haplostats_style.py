@@ -19,18 +19,18 @@
 hla_elm_toolkit.baselines.haplostats_style
 =============================================
 
-HaploStats-style haplotype-frequency imputation, following Algorithm 4 of
+HaploStats-style haplotype-frequency imputation, following Algorithm S4 of
 the article ("HaploStats-style haplotype-frequency imputation, simplified,
-based on the published NMDP method [17]", Section 2.7.1).
+based on the published NMDP method [17]", Supplementary Section S2).
 
 Unlike ``haplo_em.HaploEM`` (which *estimates* haplotype frequencies from
 genotype data via EM), this module assumes a haplotype-frequency table is
 already available (e.g. pre-estimated offline from a large multi-ethnic
 reference panel, as the real HaploStats service does) and performs only
 the online diplotype-enumeration-and-scoring step. This mirrors the
-article's own approach in Section 3.10, where the published NMDP
+article's own approach in Supplementary Section S4.3, where the published NMDP
 HaploStats web service could not be batch-queried, so an open-source,
-HaploStats-inspired baseline was substituted (article Section 3.10, 5).
+HaploStats-inspired baseline was substituted (article Supplementary Section S4.3 and main text Section 5).
 """
 
 from __future__ import annotations
@@ -57,10 +57,10 @@ class HaploStatsStyleImputer:
         self, genotype: Genotype, theta: float = 0.0, top_k: int = 1
     ) -> List[Tuple[Diplotype, float]]:
         """
-        Algorithm 4, lines 1-15: enumerate compatible diplotypes, score by
+        Algorithm S4, lines 1-15: enumerate compatible diplotypes, score by
         normalized Hardy-Weinberg likelihood, and return the top-k ranked
         list (empty list if no compatible diplotype exists in the
-        reference table -- the "no_match" case, article Algorithm 4 line 3).
+        reference table -- the "no_match" case, article Algorithm S4 line 3).
         """
         dts = compatible_diplotypes(genotype, self.reference)
         ranked = posterior_probabilities(dts, self.reference)

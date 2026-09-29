@@ -33,7 +33,7 @@ multi-stage topology is out of scope for this reference package. This
 module instead implements the same *core ELM mathematics* the article
 describes -- randomly generated, untrained input-to-hidden weights and a
 closed-form, Moore-Penrose-pseudo-inverse solution for the hidden-to-
-output weights (Figure 1; Algorithm 1, lines 7 and 18) -- over a single
+output weights (Figure 1; Algorithm S1, lines 7 and 18) -- over a single
 random hidden layer applied to a flat multi-hot locus/allele input
 encoding, rather than the exact HL-1/HL-2/HL-3 hierarchy. This preserves
 the algorithm's defining property (no iterative back-propagation) and is
@@ -130,12 +130,15 @@ class BaseELM:
     """
     Base Extreme Learning Machine: random, untrained input-to-hidden
     weights/biases; closed-form hidden-to-output weights via the
-    (ridge-regularized) Moore-Penrose pseudo-inverse (Algorithm 1, line 18;
-    Figure 1).
+    Moore-Penrose pseudo-inverse (Algorithm S1, line 16; Figure 1).
+
+    `reg_lambda` is retained for API compatibility only and is unused:
+    the article's implementation solves for beta with the unregularized
+    pseudo-inverse.
     """
 
     hidden_size: int
-    reg_lambda: float = 1.0
+    reg_lambda: float = 1.0   # unused; see class docstring
     seed: int = 0
 
     encoder: Optional[InputEncoder] = None
@@ -160,13 +163,21 @@ class BaseELM:
         rng_seed: Optional[int] = None,
     ) -> "BaseELM":
         """
-        Train following Algorithm 1: for each training genotype, sample a
+        Train following Algorithm S1: for each training genotype, sample a
         target diplotype uniformly at random from the diplotypes
         compatible with that (possibly ambiguous) genotype (line 13; the
         uniform-prior assumption is discussed as an open methodological
-        question in article Section 2.5/Section 5), accumulate the
+        question in article Sections 2.5 and 5), accumulate the
         hidden-layer output matrix H and one-hot target matrix, then solve
         beta in closed form.
+
+        Note: the article's implementation repeats this sampling pass for
+        several epochs, accumulating H and the target matrix across
+        epochs and re-solving beta once per epoch until the training
+        error falls below a threshold (Algorithm S1, lines 9-17). This
+        reference implementation performs a single pass, which is
+        sufficient to demonstrate the closed-form solution but does not
+        reproduce the article's training procedure.
         """
         self.encoder = InputEncoder.fit(ref)
         self.catalog = OutputCatalog.from_reference(ref, max_diplotypes=max_diplotypes)
@@ -194,13 +205,13 @@ class BaseELM:
         T = np.vstack(T_rows)
         H = self._hidden_activation(X)
 
-        # beta = (H^T H + I/lambda)^-1 H^T T  (Algorithm 1, line 18)
-        I = np.eye(H.shape[1])
-        self.beta = np.linalg.solve(H.T @ H + I / self.reg_lambda, H.T @ T)
+        # beta = pinv(H) T  (Algorithm S1, line 16: Moore-Penrose
+        # generalized inverse, matching the article's Sections 2.4-2.5)
+        self.beta = np.linalg.pinv(H) @ T
         return self
 
     def predict_scores(self, genotype: Genotype, ref: ReferencePopulation) -> np.ndarray:
-        """Raw output-layer scores for every candidate diplotype (Algorithm 2, line 6)."""
+        """Raw output-layer scores for every candidate diplotype (Algorithm S2, line 6)."""
         x = self.encoder.encode(genotype, ref)
         h = self._hidden_activation(x.reshape(1, -1))
         return (h @ self.beta).ravel()
@@ -211,11 +222,17 @@ class BaseELM:
         """
         Rank candidate diplotypes by output score restricted to those
         actually compatible with this genotype's activated input nodes
-        (Algorithm 2, lines 4-11), and convert scores to a probability-like
+        (Algorithm S2, lines 4-11), and convert scores to a probability-like
         distribution via a softmax over the compatible subset for
         readability (the article reports Post-P from the Hardy-Weinberg
         likelihood for the EM-style comparators; the base ELM's own
         analog is the relative rank / normalized output score used here).
+
+        Note: the article's implementation restricts the candidate set to
+        diplotypes with a positive network score (Algorithm S2, line 7)
+        and normalizes the Hardy-Weinberg posterior of Section 2.3 over
+        that set. The softmax over all compatible diplotypes used here is
+        a readability substitute and is not the article's Post-P.
         """
         candidates = [dt for dt in compatible_diplotypes(genotype, ref) if dt in self.catalog.index]
         if not candidates:
@@ -232,7 +249,7 @@ class BaseELM:
     def predict_top1(
         self, genotype: Genotype, ref: ReferencePopulation, theta: float = 0.0
     ) -> Tuple[Optional[Diplotype], Optional[float]]:
-        """Top-1 call with a Post-P-style confidence threshold (Algorithm 2, lines 12-15)."""
+        """Top-1 call with a Post-P-style confidence threshold (Algorithm S2, lines 12-15)."""
         ranked = self.predict_ranked(genotype, ref, top_k=1)
         if not ranked:
             return None, None

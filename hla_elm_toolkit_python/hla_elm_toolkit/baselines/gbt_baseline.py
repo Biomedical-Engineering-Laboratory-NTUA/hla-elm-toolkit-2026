@@ -23,7 +23,7 @@ Gradient-boosted tree ensemble comparator, following article Section 2.7:
 "a gradient-boosted tree ensemble [33,34], as a representative of the
 tree-ensemble family [35], trained per locus using the same input
 representation as the ELM models." Used in the framework-level
-benchmarking of Sections 3.2-3.4 (Table 7) and computational-efficiency
+benchmarking of Supplementary Section S3 (Table S2) and computational-efficiency
 comparison (Section 3.4, Table 8).
 
 Requires scikit-learn (see requirements.txt / README).

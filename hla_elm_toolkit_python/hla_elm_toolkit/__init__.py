@@ -28,7 +28,7 @@ Reference implementations of every method compared in:
 Includes the base Extreme Learning Machine (ELM) and its three
 extensions (KELM, WELM, Ensemble ELM; Sections 2.4-2.6), the three
 EM/Bayesian comparator baselines described in pseudocode as Algorithms
-3-5 (GRIMM-style, HaploStats-style, Hapl-o-Mat-style; Section 2.7.1),
+3-5 (GRIMM-style, HaploStats-style, Hapl-o-Mat-style; Supplementary Section S2),
 and the MLP / gradient-boosted-tree comparators used in the article's
 framework-level benchmarking (Section 2.7).
 

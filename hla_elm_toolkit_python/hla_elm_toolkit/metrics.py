@@ -21,7 +21,7 @@ hla_elm_toolkit.metrics
 
 Evaluation metrics as defined in article Section 2.3 (per-locus accuracy,
 overall/multilocus accuracy, call rate, posterior probability, top-k
-concordance) and the confidence-interval methodology of Section 2.8
+concordance) and the confidence-interval methodology of Section 2.7
 (Wilson score intervals, chosen over a naive percentile bootstrap because
 several of the article's small-sample comparator results sit at or near
 the 0%/100% boundary where a naive bootstrap is uninformative).
@@ -55,9 +55,9 @@ def wilson_score_interval(
     Preferred over a naive percentile bootstrap or normal-approximation
     (Wald) interval in this toolkit because several comparator results in
     the article sit at n as small as 2-11 and/or at 0% or 100% observed
-    accuracy (Sections 3.10-3.11); a bootstrap resampled directly from a
+    accuracy (Supplementary Sections S4.3-S4.4); a bootstrap resampled directly from a
     fully homogeneous 0%/100% sample is degenerate (zero width) regardless
-    of n, whereas the Wilson interval remains well behaved (Section 2.8).
+    of n, whereas the Wilson interval remains well behaved (Section 2.7).
     """
     if n <= 0:
         raise ValueError("n must be positive")
@@ -122,7 +122,7 @@ def summarize(
     """
     Convenience summary combining call rate and accuracy-among-called with
     Wilson score 95% CIs, in the compact "value [lo-hi%]" style used
-    throughout the article's tables (e.g. Tables 16-19).
+    throughout the article's tables (e.g. Tables 10 and 11).
     """
     results = list(results)
     cr, k_call, n_call = call_rate(results)

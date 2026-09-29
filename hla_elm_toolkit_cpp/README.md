@@ -19,10 +19,9 @@ is not included, and why.
 
 Everything said in the Python package's README Section 1 applies here
 too: this is a **from-scratch reference reimplementation**, not the
-article's original, registry-scale codebase (now open-source at
-https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026,
-archived at Zenodo, DOI: 10.5281/zenodo.22061924, per the article's
-Data Availability Statement). The base ELM's input
+article's registry-scale production code, which is bound to the registry
+data environment and is not distributed here (see the article's Data
+Availability Statement). The base ELM's input
 encoding and hidden layer are simplified relative to the article's
 domain-structured HL-1/HL-2/HL-3 topology (Section 2.4), in exactly the
 same way as the Python package. No real registry data is included; the
@@ -49,11 +48,11 @@ comparator benchmarking pipeline:
 | `Matrix` (dense linear algebra) | Implemented |
 | `Data` (genotype/haplotype types, synthetic population) | Implemented |
 | `Metrics` (Wilson score 95% CI, call rate, accuracy) | Implemented |
-| `BaseELM` (Algorithm 1-2, Section 2.4-2.5) | Implemented |
-| `HaploEM` (Algorithm 5, Hapl-o-Mat-style EM; Sections 3.7, 3.11) | Implemented |
-| KELM, WELM, Ensemble ELM (Section 2.6) | **Not ported** — see Python package |
-| GRIMM-style, HaploStats-style baselines (Section 2.7.1) | **Not ported** — see Python package |
-| MLP, gradient-boosted-tree comparators (Section 2.7) | **Not ported** — these rely on scikit-learn in the Python package and have no equivalent here |
+| `BaseELM` (Algorithms S1-S2, Sections 2.4-2.5) | Implemented |
+| `HaploEM` (Algorithm S5, Hapl-o-Mat-style EM; Supplementary Sections S4.1, S4.4) | Implemented |
+| KELM, WELM, Ensemble ELM (Section 2.6, Supplementary Section S3.2) | **Not ported** — see Python package |
+| GRIMM-style, HaploStats-style baselines (Supplementary Section S2) | **Not ported** — see Python package |
+| MLP, gradient-boosted-tree comparators (Section 2.6) | **Not ported** — these rely on scikit-learn in the Python package and have no equivalent here |
 
 If you need the extensions, the graph-based/Bayesian baselines, or the
 MLP/GBT comparators, use the Python package (`hla_elm_toolkit_python`),
@@ -123,8 +122,8 @@ hla_elm_toolkit_cpp/
 │   ├── Matrix.hpp                   dependency-free dense matrix + linear solve
 │   ├── Data.hpp                     genotype/haplotype types, synthetic population
 │   ├── Metrics.hpp                  Wilson score 95% CI, call rate, accuracy
-│   ├── BaseELM.hpp                  Algorithm 1 (training) + Algorithm 2 (inference)
-│   └── HaploEM.hpp                  Algorithm 5 (Hapl-o-Mat-style EM)
+│   ├── BaseELM.hpp                  Algorithm S1 (training) + Algorithm S2 (inference)
+│   └── HaploEM.hpp                  Algorithm S5 (Hapl-o-Mat-style EM)
 ├── examples/
 │   └── run_demo_comparison.cpp      end-to-end ELM vs. EM baseline demo
 └── tests/
@@ -135,15 +134,14 @@ hla_elm_toolkit_cpp/
 
 If you use this code, please cite the article above. This package and
 `hla_elm_toolkit_python` are companion deliverables prepared alongside
-the article's revision; the article's own original implementation is
-the canonical reference (see Section 1).
+the article's revision. It is a reference implementation, not the
+production code that produced the article's figures (see Section 1).
 
 ## 7. License
 
 Released under the MIT License (see the `LICENSE` file in this
 repository), alongside the Python package it is distributed with.
-Archived, together with the article's original registry-scale
-implementation, at:
+Archived at:
 
 - GitHub: https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
 - Zenodo (versioned DOI): 10.5281/zenodo.22061924

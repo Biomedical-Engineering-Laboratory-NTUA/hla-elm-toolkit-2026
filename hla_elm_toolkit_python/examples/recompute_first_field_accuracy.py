@@ -21,9 +21,9 @@ recompute_first_field_accuracy.py
 ===================================
 
 Addresses article gap **Gamma.1**: GRIMM, hlaR ImputeHaplo, and the
-in-house EM baseline (Sections 3.8-3.11) are scored at first-field
+in-house EM baseline (main text Sections 3.2-3.3 and Supplementary Sections S4.1-S4.4) are scored at first-field
 resolution, while the ELM framework's headline accuracy figures are
-reported at two-field resolution -- so Tables 16-19 are not currently a
+reported at two-field resolution -- so Tables 10 and 11 are not currently a
 like-for-like comparison. This script closes that gap **without any new
 model runs**: it takes the ELM's *already-computed* two-field
 predictions and confirmatory truth, truncates both to first-field, and
@@ -66,7 +66,7 @@ USAGE
         --joint    # additionally report all-loci-simultaneously accuracy
 
 Run once per cohort (HTO / ORAM / GRPT) to get the three rows needed to
-extend the "ELM (reported, overall)" rows of Tables 16-19 with a
+extend the "ELM (reported, overall)" rows of Tables 10 and 11 with a
 first-field figure alongside the existing two-field one.
 """
 
@@ -149,7 +149,7 @@ def read_rows(path: Path) -> List[Row]:
 
 
 def wilson_score_interval(successes: int, n: int, confidence: float = 0.95) -> Tuple[float, float]:
-    """Same Wilson score method used throughout hla_elm_toolkit.metrics and the article (Section 2.8)."""
+    """Same Wilson score method used throughout hla_elm_toolkit.metrics and the article (Section 2.7)."""
     if n <= 0:
         raise ValueError("n must be positive")
     z = {0.90: 1.644853627, 0.95: 1.959963985, 0.99: 2.575829304}[confidence]
@@ -163,7 +163,7 @@ def wilson_score_interval(successes: int, n: int, confidence: float = 0.95) -> T
 def first_field_match(pred: Tuple[str, str], true: Tuple[str, str]) -> bool:
     """Unordered-pair match at first-field resolution (matches the article's
     'first-field top-1 concordance' definition used for GRIMM/hlaR/EM baselines,
-    Sections 3.8-3.11)."""
+    main text Sections 3.2-3.3 and Supplementary Sections S4.1-S4.4)."""
     pred_ff = frozenset(truncate_first_field(a) for a in pred)
     true_ff = frozenset(truncate_first_field(a) for a in true)
     return pred_ff == true_ff

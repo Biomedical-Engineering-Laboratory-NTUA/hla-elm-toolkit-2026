@@ -18,9 +18,9 @@
 // HaploEM.hpp
 // Expectation-maximization (EM) haplotype-frequency estimation and
 // imputation, matching hla_elm_toolkit.baselines.haplo_em in the Python
-// package (Algorithm 5, article Section 2.7.1). The same core class
-// serves both the two-locus baseline (Section 3.7) and the five-locus
-// in-house baseline (Section 3.11) by varying which loci are passed in.
+// package (Algorithm S5, article Supplementary Section S2). The same core class
+// serves both the two-locus baseline (Supplementary Section S4.1) and the five-locus
+// in-house baseline (Supplementary Section S4.4) by varying which loci are passed in.
 
 #pragma once
 
@@ -39,7 +39,7 @@ public:
     explicit HaploEM(std::vector<std::string> loci, int max_iter = 100, double tol = 1e-6)
         : loci_(std::move(loci)), max_iter_(max_iter), tol_(tol) {}
 
-    // Phase 1 (offline) of Algorithm 5: estimate haplotype frequencies
+    // Phase 1 (offline) of Algorithm S5: estimate haplotype frequencies
     // from a reference panel of unphased, possibly ambiguous genotypes.
     void fit(const std::vector<Genotype>& genotypes, const ReferencePopulation& ref_for_enumeration) {
         std::vector<std::vector<Diplotype>> per_genotype_dts;
@@ -105,7 +105,7 @@ public:
         return ref;
     }
 
-    // Phase 2 (online) of Algorithm 5: rank diplotypes compatible with a
+    // Phase 2 (online) of Algorithm S5: rank diplotypes compatible with a
     // query genotype by posterior probability, return the top-1 call if
     // it clears the confidence threshold theta.
     std::pair<std::optional<Diplotype>, std::optional<double>> score_genotype(

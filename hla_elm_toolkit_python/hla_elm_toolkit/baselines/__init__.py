@@ -17,9 +17,9 @@
 
 """
 Comparator methods benchmarked against the ELM family in the article:
-GRIMM (Algorithm 3), HaploStats-style imputation (Algorithm 4),
-Hapl-o-Mat-style EM estimation (Algorithm 5, used for both the two-locus
-Section 3.7 baseline and the five-locus Section 3.11 baseline), plus the
+GRIMM (Algorithm S3), HaploStats-style imputation (Algorithm S4),
+Hapl-o-Mat-style EM estimation (Algorithm S5, used for both the two-locus
+Supplementary Section S4.1 baseline and the five-locus Supplementary Section S4.4 baseline), plus the
 MLP and gradient-boosted-tree comparators of Section 2.7.
 """
 

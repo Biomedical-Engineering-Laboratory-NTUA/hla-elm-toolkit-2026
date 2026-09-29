@@ -20,19 +20,19 @@ hla_elm_toolkit.baselines.haplo_em
 =====================================
 
 Expectation-maximization (EM) haplotype-frequency estimation and
-imputation, following Algorithm 5 of the article ("Hapl-o-Mat: open-source
-EM haplotype-frequency estimation and imputation", Section 2.7.1).
+imputation, following Algorithm S5 of the article ("Hapl-o-Mat: open-source
+EM haplotype-frequency estimation and imputation", Supplementary Section S2).
 
 This is the same core algorithm used for:
   * the two-locus (HLA-A~HLA-B) baseline run directly on the registry
-    data in article Section 3.7, and
-  * the five-locus "in-house Hapl-o-Mat-style" baseline of Section 3.11,
+    data in article Supplementary Section S4.1, and
+  * the five-locus "in-house Hapl-o-Mat-style" baseline of Supplementary Section S4.4,
 
 by simply changing which loci are passed in. It is explicitly an
 **approximation** of the published Hapl-o-Mat tool's core EM logic, not
 a reproduction of Hapl-o-Mat itself: population-weighting options,
 specific convergence criteria, and ambiguity-resolution details of the
-published tool are not reproduced here (article Sections 2.7.1, 3.11,
+published tool are not reproduced here (article Supplementary Sections S2 and S4.4,
 and 5 make the same distinction for the original implementation).
 """
 
@@ -57,13 +57,13 @@ class HaploEM:
 
     def fit(self, genotypes: Sequence[Genotype], ref_for_enumeration: ReferencePopulation) -> "HaploEM":
         """
-        Phase 1 (offline) of Algorithm 5: estimate haplotype frequencies
+        Phase 1 (offline) of Algorithm S5: estimate haplotype frequencies
         from a reference panel of unphased, possibly-ambiguous genotypes.
 
         ``ref_for_enumeration`` supplies the candidate haplotype universe
         used to enumerate phase-compatible diplotypes for each genotype
         (in the article, this is built directly from the observed allele
-        combinations in the training data; see Sections 3.7 and 3.11 for
+        combinations in the training data; see Supplementary Sections S4.1 and S4.4 for
         the exact candidate-pool sizes on the real registry).
         """
         # Per-genotype compatible diplotype lists (built once, reused every EM iteration).
@@ -119,7 +119,7 @@ class HaploEM:
         self, genotype: Genotype, theta: float = 0.0
     ) -> Tuple[Optional[Diplotype], Optional[float]]:
         """
-        Phase 2 (online) of Algorithm 5: rank diplotypes compatible with a
+        Phase 2 (online) of Algorithm S5: rank diplotypes compatible with a
         query genotype by posterior probability and return the top-1 call
         if it clears the confidence threshold ``theta``.
         """

@@ -1,11 +1,12 @@
-# Core dependency (ELM/KELM/WELM/Ensemble ELM, EM baseline, GRIMM-style,
-# HaploStats-style, metrics module).
-numpy>=1.24
+# Versions pinned to the environment used for the analyses reported in the
+# article (Python 3.12, conda environment on the "Titanas" server).
+numpy==2.5.3
+scipy==1.18.1
 
 # Required only for the MLP and gradient-boosted-tree comparators
 # (hla_elm_toolkit.baselines.mlp_baseline / gbt_baseline), used in the
-# article's framework-level benchmarking (Section 2.7, Table 7).
-scikit-learn>=1.3
+# article's framework-level benchmarking (Supplementary Section S3).
+scikit-learn==1.5.2
 
 # Optional, for running the test suite via `pytest tests/`.
 # (tests/test_basic.py also runs standalone with plain `python`.)

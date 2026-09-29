@@ -152,7 +152,7 @@ def main():
     print("  " + format_summary("Ensemble ELM", summarize(ens_results)))
 
     # ---- HaploStats-style (using the TRUE reference frequencies, as the
-    #      article's Algorithm 4 assumes a pre-estimated table) ----
+    #      article's Algorithm S4 assumes a pre-estimated table) ----
     t0 = time.time()
     hs = HaploStatsStyleImputer(reference=ref)
     hs_results = evaluate_top1(
@@ -187,8 +187,8 @@ def main():
 
     print("\nNote: this demo uses a small synthetic reference population for")
     print("illustration only; absolute accuracy/call-rate figures are not")
-    print("comparable to the article's real-registry results (Sections 3.5,")
-    print("3.7-3.11), which used the (non-distributable) HTO/ORAM/GRPT data.")
+    print("comparable to the article's real-registry results (Section 3.2 and")
+    print("Supplementary Section S4), which used the (non-distributable) HTO/ORAM/GRPT data.")
 
 
 if __name__ == "__main__":
