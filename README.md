@@ -57,7 +57,7 @@ installation instructions and a quick-start example.
 ## Archive and citation
 
 - GitHub: https://github.com/Biomedical-Engineering-Laboratory-NTUA/hla-elm-toolkit-2026
-- Zenodo (versioned DOI): 10.5281/zenodo.22061924
+- Zenodo (versioned DOI): 10.5281/zenodo.22061923
 
 Released under the MIT License (see `LICENSE`). If you use this code,
 please cite the article above together with the Zenodo DOI.
