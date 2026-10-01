@@ -4,9 +4,9 @@ C++17 port of the Python `hla_elm_toolkit` reference package, covering
 the **core** methods compared in:
 
 > Kepentzis, S.; Chatzistamatiou, T.; Digalakis, J.; Petropoulou, O.;
-> Matsopoulos, G.K.; Koutsouris, D. *Development of an Extreme Learning
-> Machine approach to upgrade low/mid to high resolution HLA data
-> improving the usability of donor data from registries.* Genes.
+> Matsopoulos, G.K.; Koutsouris, D. *Improving the Usability of Donor Data from Registries Using
+> an Extreme Learning Machine Approach to Upgrade Low/Mid- to
+> High-Resolution HLA Data.* Genes.
 
 This is a **companion, narrower** deliverable to the Python package
 (`hla_elm_toolkit_python`, distributed alongside this archive), not a

@@ -3,9 +3,9 @@
 Reference implementation accompanying:
 
 > Kepentzis, S.; Chatzistamatiou, T.; Digalakis, J.; Petropoulou, O.;
-> Matsopoulos, G.K.; Koutsouris, D. *Development of an Extreme Learning
-> Machine approach to upgrade low/mid to high resolution HLA data
-> improving the usability of donor data from registries.* Genes (MDPI),
+> Matsopoulos, G.K.; Koutsouris, D. *Improving the Usability of Donor Data from Registries Using
+> an Extreme Learning Machine Approach to Upgrade Low/Mid- to
+> High-Resolution HLA Data.* Genes (MDPI),
 > manuscript ID genes-4557658, under review.
 
 This repository provides a from-scratch **reference implementation** of
