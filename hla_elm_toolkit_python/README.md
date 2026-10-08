@@ -4,9 +4,9 @@ Reference Python implementations of **every method compared** in:
 
 > Kepentzis, S.; Chatzistamatiou, T.; Digalakis, J.; Petropoulou, O.;
 > Matsopoulos, G.K.; Koutsouris, D. *Improving the Usability of Donor Data from Registries Using
-> an Extreme Learning Machine Approach to Upgrade Low/Mid- to
+> an Extreme Learning Machine Approach to Upgrade Low-/Mid- to
 > High-Resolution HLA Data.* Genes (MDPI),
-> manuscript ID genes-4557658, under review.
+> Genes 2026, 17, 1239, https://doi.org/10.3390/genes17101239.
 
 This package implements the base Extreme Learning Machine (ELM) and its
 three extensions (KELM, WELM, Ensemble ELM), the three EM/Bayesian
