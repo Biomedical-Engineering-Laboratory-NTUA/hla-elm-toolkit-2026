@@ -4,9 +4,9 @@ Reference implementation accompanying:
 
 > Kepentzis, S.; Chatzistamatiou, T.; Digalakis, J.; Petropoulou, O.;
 > Matsopoulos, G.K.; Koutsouris, D. *Improving the Usability of Donor Data from Registries Using
-> an Extreme Learning Machine Approach to Upgrade Low/Mid- to
+> an Extreme Learning Machine Approach to Upgrade Low-/Mid- to
 > High-Resolution HLA Data.* Genes (MDPI),
-> manuscript ID genes-4557658, under review.
+> Genes 2026, 17, 1239, https://doi.org/10.3390/genes17101239 
 
 This repository provides a from-scratch **reference implementation** of
 the core Extreme Learning Machine (ELM) mathematics described in the
