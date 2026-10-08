@@ -24,3 +24,12 @@ authors:
     given-names: George K.
   - family-names: Koutsouris
     given-names: Dimitrios
+preferred-citation:
+  type: article
+  title: "Improving the Usability of Donor Data from Registries Using an Extreme Learning Machine Approach to Upgrade Low-/Mid- to High-Resolution HLA Data"
+  journal: "Genes"
+  year: 2026
+  volume: 17
+  issue: 10
+  start: 1239
+  doi: "10.3390/genes17101239"
