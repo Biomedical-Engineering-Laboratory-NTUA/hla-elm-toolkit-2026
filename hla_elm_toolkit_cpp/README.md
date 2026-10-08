@@ -5,9 +5,8 @@ the **core** methods compared in:
 
 > Kepentzis, S.; Chatzistamatiou, T.; Digalakis, J.; Petropoulou, O.;
 > Matsopoulos, G.K.; Koutsouris, D. *Improving the Usability of Donor Data from Registries Using
-> an Extreme Learning Machine Approach to Upgrade Low/Mid- to
-> High-Resolution HLA Data.* Genes.
-
+> an Extreme Learning Machine Approach to Upgrade Low-/Mid- to
+> High-Resolution HLA Data.* Genes 2026, 17, 1239, https://doi.org/10.3390/genes17101239
 This is a **companion, narrower** deliverable to the Python package
 (`hla_elm_toolkit_python`, distributed alongside this archive), not a
 1:1 port of every module. See Section 2 below for exactly what is and
