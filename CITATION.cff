@@ -4,7 +4,7 @@ title: "hla-elm-toolkit-2026: reference implementation of an ELM framework for H
 abstract: >-
   Reference implementation of the Extreme Learning Machine training and inference
   algorithms, the KELM/WELM/Ensemble ELM extensions, and the comparator algorithms
-  described in Kepentzis et al. (Genes, MDPI, manuscript genes-4557658). Not the
+  described in Kepentzis et al. (Genes 2026, 17, 1239, https://doi.org/10.3390/genes17101239). Not the
   registry-scale production code; see README.md for scope.
 type: software
 license: MIT
